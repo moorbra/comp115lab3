@@ -8,17 +8,22 @@ namespace Lab3
 {
     public class PayCalculator
     {
-        public decimal CalculateRegularPay(
-            decimal hoursWorked, decimal hourlyRate)
-        {
-            const int regularPayInterval = 40;
-            if (hoursWorked <= regularPayInterval)
-            {
+        private const int regularPayInterval = 40;
+
+        public decimal CalculateRegularPay(decimal hoursWorked, decimal hourlyRate)
+        {            
+            if (hoursWorked <= regularPayInterval)            
                 return hourlyRate * hoursWorked;
-            }
-            else
-            {
-                return regularPayInterval * hourlyRate;
-            }
+
+            return regularPayInterval * hourlyRate;            
+        }
+
+        public decimal CalculateOvertime(int hoursWorkedWithOverTime, int hourlyRate, decimal overtimeFactor)
+        {
+            if (hoursWorkedWithOverTime <= regularPayInterval)
+                return 0;
+
+            return (hoursWorkedWithOverTime - regularPayInterval) * hourlyRate * overtimeFactor;
+        }
     }
 }
