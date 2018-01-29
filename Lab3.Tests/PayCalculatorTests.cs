@@ -48,7 +48,7 @@ namespace Lab3.Tests
             const decimal overtimeFactor = 1.5m;
 
             PayCalculator payCalculator = new PayCalculator();
-            decimal actualOvertimePay = payCalculator.CalculateOvertime(hoursWorkedWithOverTime, hourlyRate, overtimeFactor);
+            decimal actualOvertimePay = payCalculator.CalculateOvertimePay(hoursWorkedWithOverTime, hourlyRate, overtimeFactor);
 
             Assert.IsTrue(expectedOvertimePay == actualOvertimePay,
                 $"Expected overtime pay {expectedOvertimePay} to equal actual overtime pay {actualOvertimePay}");
@@ -64,13 +64,25 @@ namespace Lab3.Tests
             const decimal overtimeFactor = 1.5m;
 
             PayCalculator payCalculator = new PayCalculator();
-            decimal actualOvertimePayWhenHoursWorkedIsExactlyRegularPayInteveral = payCalculator.CalculateOvertime(hoursWorkedExactlyRegularPayInterval, hourlyRate, overtimeFactor);
+            decimal actualOvertimePayWhenHoursWorkedIsExactlyRegularPayInteveral = payCalculator.CalculateOvertimePay(hoursWorkedExactlyRegularPayInterval, hourlyRate, overtimeFactor);
             Assert.IsTrue(expectedOvertimePay == actualOvertimePayWhenHoursWorkedIsExactlyRegularPayInteveral,
                 $"Expected overtime pay {expectedOvertimePay} when hours worked {hoursWorkedExactlyRegularPayInterval} is equal to the regular pay interval to equal actual overtime pay {actualOvertimePayWhenHoursWorkedIsExactlyRegularPayInteveral}");
 
-            decimal actualOvertimePayWhenHoursWorkedIsLessThanRegularPayInteveral = payCalculator.CalculateOvertime(hoursWorkedLessThanRegularPayInterval, hourlyRate, overtimeFactor);
+            decimal actualOvertimePayWhenHoursWorkedIsLessThanRegularPayInteveral = payCalculator.CalculateOvertimePay(hoursWorkedLessThanRegularPayInterval, hourlyRate, overtimeFactor);
             Assert.IsTrue(expectedOvertimePay == actualOvertimePayWhenHoursWorkedIsLessThanRegularPayInteveral,
                 $"Expected overtime pay {expectedOvertimePay} when hours worked {hoursWorkedLessThanRegularPayInterval} is equal to the regular pay interval to equal actual overtime pay {actualOvertimePayWhenHoursWorkedIsLessThanRegularPayInteveral}");
+        }
+
+        [TestMethod]
+        public void CalculateGrossPayTest()
+        {
+            const decimal regularPay = 400;
+            const decimal overTimePay = 100;
+            const decimal expectedGrossPay = 500;
+
+            PayCalculator payCalculator = new PayCalculator();
+            decimal actualGrossPay = payCalculator.CalculateGrossPay(regularPay, overTimePay);
+            Assert.IsTrue(actualGrossPay == expectedGrossPay, $"Expected gross pay {expectedGrossPay}. Actual gross pay {actualGrossPay}");
         }
     }
 }
