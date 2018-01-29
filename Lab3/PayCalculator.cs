@@ -18,12 +18,12 @@ namespace Lab3
             return regularPayInterval * hourlyRate;            
         }
 
-        public decimal CalculateOvertimePay(int hoursWorkedWithOverTime, int hourlyRate, decimal overtimeFactor)
+        public decimal CalculateOvertimePay(decimal hoursWorked, decimal hourlyRate, decimal overtimeFactor)
         {
-            if (hoursWorkedWithOverTime <= regularPayInterval)
+            if (hoursWorked <= regularPayInterval)
                 return 0;
 
-            return (hoursWorkedWithOverTime - regularPayInterval) * hourlyRate * overtimeFactor;
+            return (hoursWorked - regularPayInterval) * hourlyRate * overtimeFactor;
         }
 
         public decimal CalculateGrossPay(decimal regularPay, decimal overTimePay)
@@ -50,7 +50,7 @@ namespace Lab3
 
         public decimal CalculateNetPay(decimal grossPay, decimal taxRate)
         {
-            return grossPay - (grossPay * taxRate);
+            return grossPay * (1 - taxRate);
         }
     }
 }
