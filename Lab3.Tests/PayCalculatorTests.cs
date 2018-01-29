@@ -84,5 +84,59 @@ namespace Lab3.Tests
             decimal actualGrossPay = payCalculator.CalculateGrossPay(regularPay, overTimePay);
             Assert.IsTrue(actualGrossPay == expectedGrossPay, $"Expected gross pay {expectedGrossPay}. Actual gross pay {actualGrossPay}");
         }
+
+        [TestMethod]
+        public void GetTaxRateTest()
+        {
+            const string marriedUpper = "M";
+            const string singleUpper = "S";
+            const string widowedUpper = "W";
+            const string divorcedUpper = "D";
+            const string marriedLower = "m";
+            const string singleLower = "s";
+            const string widowedLower = "w";
+            const string divorcedLower = "d";
+            const decimal expectedMarriedTaxRate = .15m;
+            const decimal expectedSingleTaxRate = .22m;
+            const decimal expectedWidowedTaxRate = .13m;
+            const decimal expectedDivorcedTaxRate = .23m;
+
+            PayCalculator payCalculator = new PayCalculator();
+            decimal actualMarriedTaxRateUpper = payCalculator.CalculateTaxRate(marriedUpper);
+            Assert.IsTrue(expectedMarriedTaxRate == actualMarriedTaxRateUpper, $"Expected married tax rate {expectedMarriedTaxRate} when marital status is {marriedUpper}. Actual tax rate {actualMarriedTaxRateUpper}");
+
+            decimal actualMarriedTaxRateLower = payCalculator.CalculateTaxRate(marriedLower);
+            Assert.IsTrue(expectedMarriedTaxRate == actualMarriedTaxRateUpper, $"Expected married tax rate {expectedMarriedTaxRate} when marital status is {marriedLower}. Actual tax rate {actualMarriedTaxRateLower}");
+
+            decimal actualSingleTaxRateUpper = payCalculator.CalculateTaxRate(singleUpper);
+            Assert.IsTrue(expectedSingleTaxRate == actualSingleTaxRateUpper, $"Expected single tax rate {expectedSingleTaxRate} when marital status is {singleUpper}. Actual tax rate {actualSingleTaxRateUpper}");
+
+            decimal actualSingleTaxRateLower = payCalculator.CalculateTaxRate(singleLower);
+            Assert.IsTrue(expectedSingleTaxRate == actualSingleTaxRateUpper, $"Expected single tax rate {expectedSingleTaxRate} when marital status is {singleLower}. Actual tax rate {actualSingleTaxRateLower}");
+
+            decimal actualDivorcedTaxRateUpper = payCalculator.CalculateTaxRate(divorcedUpper);
+            Assert.IsTrue(expectedDivorcedTaxRate == actualDivorcedTaxRateUpper, $"Expected divorced tax rate {expectedDivorcedTaxRate} when marital status is {divorcedUpper}. Actual tax rate {actualDivorcedTaxRateUpper}");
+
+            decimal actualDivorcedTaxRateLower = payCalculator.CalculateTaxRate(divorcedLower);
+            Assert.IsTrue(expectedDivorcedTaxRate == actualDivorcedTaxRateUpper, $"Expected divorced tax rate {expectedDivorcedTaxRate} when marital status is {divorcedLower}. Actual tax rate {actualDivorcedTaxRateLower}");
+
+            decimal actualWidowedTaxRateUpper = payCalculator.CalculateTaxRate(widowedUpper);
+            Assert.IsTrue(expectedWidowedTaxRate == actualWidowedTaxRateUpper, $"Expected widowed tax rate {expectedWidowedTaxRate} when marital status is {widowedUpper}. Actual tax rate {actualWidowedTaxRateUpper}");
+
+            decimal actualWidowedTaxRateLower = payCalculator.CalculateTaxRate(widowedLower);
+            Assert.IsTrue(expectedWidowedTaxRate == actualWidowedTaxRateUpper, $"Expected widowed tax rate {expectedWidowedTaxRate} when marital status is {widowedLower}. Actual tax rate {actualWidowedTaxRateLower}");
+        }
+
+        [TestMethod]
+        public void GetNetPayTest()
+        {
+            const decimal grossPay = 1000;
+            const decimal taxRate = .10m;
+            const decimal expectedNetPay = 900;
+
+            PayCalculator payCalculator = new PayCalculator();
+            decimal actualNetPay = payCalculator.CalculateNetPay(grossPay, taxRate);
+            Assert.IsTrue(expectedNetPay == actualNetPay, $"Expected net pay {expectedNetPay}. Actual net pay {actualNetPay}");
+        }
     }
 }

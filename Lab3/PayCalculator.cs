@@ -30,5 +30,27 @@ namespace Lab3
         {
             return regularPay + overTimePay;
         }
+
+        public decimal CalculateTaxRate(string maritalStatus)
+        {
+            switch(maritalStatus.ToLower())
+            {
+                case "m":
+                    return .15m;
+                case "s":
+                    return .22m;
+                case "d":
+                    return .23m;
+                case "w":
+                    return .13m;
+                default:
+                    return 0;
+            }
+        }
+
+        public decimal CalculateNetPay(decimal grossPay, decimal taxRate)
+        {
+            return grossPay - (grossPay * taxRate);
+        }
     }
 }
